@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 
 var bodyParser = require('body-parser');
-const { Client } = require('pg');
+var pg = require('pg');
 
 const app = express();
 
@@ -19,22 +19,33 @@ var databaseurl = 'postgres://nswclifegblitx:597cfe4bfb7502885f6404f82189812c41b
 
 console.log('the database url is' + process.env.DATABASE_URL);
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
-
-client.connect();
 
 app.get('/contacts', function(req,res) {
 	console.log('bbb');
 	
-	client.query('SELECT * FROM salesforce', (err, res) => {
-	  if (err) throw err;
-	  for (let row of res.rows) {
-		console.log(JSON.stringify(row));
-	  }
-	  client.end();
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+		
+        if (err) {
+			console.log(err);
+		}else{
+			
+				
+			conn.query(
+				'select * from salesforce.contact;',
+				function(err, result) {
+					console.log(result);
+					if (err != null || result.rowCount == 0) {
+						console.log('was an error');
+						console.log(err);
+					}
+					else {
+						done();
+						res.json(result);
+					}
+				}
+			);
+			
+		}
 	});
 	
 });
