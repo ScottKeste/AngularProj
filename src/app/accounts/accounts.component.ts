@@ -3,6 +3,7 @@ import { AccountsResp, AccountsService } from './accounts.service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-accounts',
   templateUrl: './accounts.component.html',
@@ -21,6 +22,7 @@ export class AccountsComponent implements OnInit {
         var getUrl = window.location;
         this.baseUrl = getUrl .protocol + "//" + getUrl.host;
         console.log(this.baseUrl);
+        this.getData();
   }
 
     getAccounts(){

@@ -1,6 +1,20 @@
-<button (click)="getData()">Get Data</button>
+<!--button (click)="getData()">Get Data</button-->
 
-<div *ngFor="let row of (data |async)?.rows ">
-  {{ row | json }}
-  
-</div>
+<h2>
+    Accounts
+</h2>
+<table> 
+    <tr>
+        <td><h3>Name</h3></td>
+        <td><h3>Address</h3></td>
+    </tr>
+    <tr *ngFor="let row of (data |async)?.rows ">
+        <td>{{row.name}}</td>
+        <td>{{row.billingstreet}}</td>
+    </tr>
+</table>
+
+    <!--tr *ngFor="let row of (data |async)?.rows ">
+      {{ row | json }}
+
+    </tr-->
