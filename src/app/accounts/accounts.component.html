@@ -1,18 +1,42 @@
 <!--button (click)="getData()">Get Data</button-->
 
 <h2>
-    Accounts
+    Account Data coming from Salesforce
 </h2>
-<table> 
-    <tr>
-        <td><h3>Name</h3></td>
-        <td><h3>Address</h3></td>
-    </tr>
-    <tr *ngFor="let row of (data |async)?.rows ">
-        <td>{{row.name}}</td>
-        <td>{{row.billingstreet}}</td>
-    </tr>
-</table>
+
+<button (click)="toggleEditMode()">{{editMode ? 'Disable Editing' : 'Enable Editing'}}</button>
+<div *ngIf="!editMode">
+    <table> 
+        <tr>
+            <td><h3>Name</h3></td>
+            <td><h3>Country</h3></td>
+            <td><h3>State</h3></td>
+            <td><h3>Address</h3></td>
+        </tr>
+        <tr *ngFor="let row of (data)?.rows ">
+            <td>{{row.name}}</td>
+            <td>{{row.billingcountry}}</td>
+            <td>{{row.billingstate}}</td>
+            <td>{{row.billingstreet}}</td>
+        </tr>
+    </table>
+</div>
+<div *ngIf="editMode">
+    <table > 
+        <tr>
+            <td><h3>Name</h3></td>
+            <td><h3>Country</h3></td>
+            <td><h3>State</h3></td>
+            <td><h3>Address</h3></td>
+        </tr>
+        <tr *ngFor="let row of (data)?.rows; let index=index;trackBy:trackByIndex;">
+            <td><input [(ngModel)]="row.name" (ngModelChange)="loadValueChange($event,index,'name')"></td>
+            <td><input [(ngModel)]="row.billingcountry"></td>
+            <td><input [(ngModel)]="row.billingstate"></td>
+            <td><input [(ngModel)]="row.billingstreet"></td>
+        </tr>
+    </table>
+</div>
 
     <!--tr *ngFor="let row of (data |async)?.rows ">
       {{ row | json }}
