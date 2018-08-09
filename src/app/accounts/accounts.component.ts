@@ -60,7 +60,7 @@ export class AccountsComponent implements OnInit {
         //console.log(JSON.stringify(this.data));
         //console.log(this.baseUrl + '/update');
         this.dataPost = this.http.post(this.baseUrl + '/update', JSON.parse(JSON.stringify(this.data)).rows, httpOptions);
-        this.dataPost.subscribe(val => console.log('got post response ');
+        this.dataPost.subscribe(val => console.log('got post response '));
     }
 
     trackByIndex(index: number, obj: any): any {
