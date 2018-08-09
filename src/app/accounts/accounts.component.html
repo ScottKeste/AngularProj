@@ -14,6 +14,7 @@
             <td><h3>State</h3></td>
             <td><h3>Address</h3></td>
             <td><h3>Phone #</h3></td>
+            <td></td>
         </tr>
         <tr *ngFor="let row of (data)?.rows ">
             <td>{{row.name}}</td>
@@ -21,6 +22,7 @@
             <td>{{row.billingstate}}</td>
             <td>{{row.billingstreet}}</td>
             <td>{{row.phone}}</td>
+            <td><a href="https://shagen-dev-ed.lightning.force.com/lightning/r/Account/{{row.sfid}}/view">View in Salesforce</a></td>
         </tr>
     </table>
 </div>
@@ -32,6 +34,7 @@
             <td><h3>State</h3></td>
             <td><h3>Address</h3></td>
             <td><h3>Phone #</h3></td>
+            <td></td>
         </tr>
         <tr *ngFor="let row of (data)?.rows; let index=index;trackBy:trackByIndex;">
             <td>{{row.name}}</td>
