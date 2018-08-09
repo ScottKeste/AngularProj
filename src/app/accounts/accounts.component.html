@@ -5,6 +5,7 @@
 </h2>
 
 <button (click)="toggleEditMode()">{{editMode ? 'Disable Editing' : 'Enable Editing'}}</button>
+<button (click)="updateAccounts()">Update Accounts</button>
 <div *ngIf="!editMode">
     <table> 
         <tr>
@@ -12,12 +13,14 @@
             <td><h3>Country</h3></td>
             <td><h3>State</h3></td>
             <td><h3>Address</h3></td>
+            <td><h3>Phone #</h3></td>
         </tr>
         <tr *ngFor="let row of (data)?.rows ">
             <td>{{row.name}}</td>
             <td>{{row.billingcountry}}</td>
             <td>{{row.billingstate}}</td>
             <td>{{row.billingstreet}}</td>
+            <td>{{row.phone}}</td>
         </tr>
     </table>
 </div>
@@ -28,12 +31,14 @@
             <td><h3>Country</h3></td> 
             <td><h3>State</h3></td>
             <td><h3>Address</h3></td>
+            <td><h3>Phone #</h3></td>
         </tr>
         <tr *ngFor="let row of (data)?.rows; let index=index;trackBy:trackByIndex;">
             <td>{{row.name}}</td>
             <td><input [(ngModel)]="row.billingcountry"></td>
             <td><input [(ngModel)]="row.billingstate"></td>
             <td><input [(ngModel)]="row.billingstreet"></td>
+            <td><input [(ngModel)]="row.phone"></td>
         </tr>
     </table>
 </div>
