@@ -7,18 +7,18 @@ var pg = require('pg');
 
 const app = express();
 
+    const { exec } = require('child_process');
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/angular-tour-of-heroes'));
 
 app.use(bodyParser.json());
 
 app.get('/Angular', function(req,res) {
-    
-var sys = require('sys')
-const { exec } = require('child_process');
-    
-var child;
-    
+
+
+
+
+
 res.sendFile(path.join(__dirname+'/dist/angular-tour-of-heroes/index.html'));
 });
 
@@ -27,16 +27,14 @@ res.sendFile(path.join(__dirname+'/dist/angular-tour-of-heroes/index.html'));
 
 app.get('/accounts', function(req,res) {
     console.log('api call');
-    
-   exec('echo', (error, stdout, stderr) => {
-    if (error) {
-      console.error(`exec error: ${error}`);
-      return;
-    }
-        console.log(`stdout: ${stdout}`);
-        console.log(`stderr: ${stderr}`);
-      });
-    
+    exec('pwd', (error, stdout, stderr) => {
+      if (error) {
+        console.error(`exec error: ${error}`);
+        return;
+      }
+      console.log(`stdout: ${stdout}`);
+      console.log(`stderr: ${stderr}`);
+    });
     /*pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) {
             console.log(err);
