@@ -14,6 +14,11 @@ app.use(bodyParser.json());
 
 app.get('/Angular', function(req,res) {
     
+var sys = require('sys')
+const { exec } = require('child_process');
+    
+var child;
+    
 res.sendFile(path.join(__dirname+'/dist/angular-tour-of-heroes/index.html'));
 });
 
@@ -21,7 +26,18 @@ res.sendFile(path.join(__dirname+'/dist/angular-tour-of-heroes/index.html'));
 
 
 app.get('/accounts', function(req,res) {
-    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+    console.log('api call');
+    
+   exec('echo', (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return;
+    }
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+      });
+    
+    /*pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) {
             console.log(err);
             }else{	
@@ -39,7 +55,7 @@ app.get('/accounts', function(req,res) {
                     }
                 );
             }
-    });
+    });*/
 });
 
 app.post('/update', function(req,res){
@@ -59,4 +75,6 @@ app.post('/update', function(req,res){
 });
 
 // Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8080, () => {
+  console.log('Server started!');
+});
