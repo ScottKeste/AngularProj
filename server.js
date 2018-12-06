@@ -26,7 +26,7 @@ res.sendFile(path.join(__dirname+'/dist/angular-tour-of-heroes/index.html'));
 
 
 app.get('/accounts', function(req,res) {
-    console.log('api call');
+    /*console.log('api call');
     exec('pwd', (error, stdout, stderr) => {
       if (error) {
         console.error(`exec error: ${error}`);
@@ -34,8 +34,8 @@ app.get('/accounts', function(req,res) {
       }
       console.log(`stdout: ${stdout}`);
       console.log(`stderr: ${stderr}`);
-    });
-    /*pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+    });*/
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) {
             console.log(err);
             }else{	
@@ -53,7 +53,7 @@ app.get('/accounts', function(req,res) {
                     }
                 );
             }
-    });*/
+    });
 });
 
 app.post('/update', function(req,res){
